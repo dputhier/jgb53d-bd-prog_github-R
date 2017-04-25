@@ -48,10 +48,11 @@ Vous trouverez ci-dessous des  informations portant sur les concepts nécessaire
 |-----|-----------
 |[Bioinformatique: applications dans le contexte de la génomique](theorical/Bioinformatique.pdf)  | Les challenges en bioinformatique dans le domaine de la génomique notamment
 | [Vue d'ensemble du système Unix](theorical/bash/unix_course_dp.pdf)| Bash, arborescence, commandes de base, redirections, expressions régulières, réseau, exemple d'outils pour la bioinformatique... 
-| [Premiers pas avec R]() | Hello world, manipulation de variables.
+| [Premiers pas avec R]() | Aller, on laisse tomber Excel ! Hello world, manipulation de variables. 
 | [Les tableaux en R]() | Matrices, data.frames, lists...
 | [Lire et écrire dans un fichier]() | les fonctions *read.table* et *write.table*.
 | [Les fonctions]()  | définition et appel, passage d'arguments par noms, variable retour, portée des variables.
+| [Utiliser ggplot2]()  | Les bases de ggplot2.
 
 -------------------------------------------------------
 
