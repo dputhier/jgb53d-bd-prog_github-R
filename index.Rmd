@@ -28,7 +28,7 @@ output:
 | ggplot2 |http://ggplot2.org/| Une librairie graphique qui permet de concevoir un diagramme comme une succession de couches.
 | Google's R Style Guide	| https://google.github.io/styleguide/Rguide.xml	| Un guide concis pour les règles d'écriture en R
 |ggthemes| https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html | Des thèmes pour ggplot2.
-| Hadley Wickham's R Style Guide	| https://google.github.io/styleguide/Rguide.xml	| Un guide concis pour les règles d'écriture en R par Hadley Wickham.
+|The tidyverse style guide|http://style.tidyverse.org/| Un guide complet pour les règles d'écriture en R par Hadley Wickham. Pour Hadley les règles d'écritures constituent une ponctuation. C'estplusfacileàlireetquandc'estbienponctué. 
 |ggrepel| https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html| Annotation simple et élégante de vos nuages de points.
 |rCharts|https://ramnathv.github.io/rCharts/| Créer des diagrammes interactifs en quelques commandes.
 | lintr | https://cran.r-project.org/web/packages/lintr/index.html | Pour analyser votre code et tester sa conformité.
