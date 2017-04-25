@@ -1,0 +1,275 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,epsfig,hyperref}%psfig,pstricks,
+\parindent 0in
+\usepackage{graphicx}
+\usepackage{moreverb} % tabulation in verbatim mode
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage[latin1]{inputenc} % LaTeX, comprends les accents !
+\usepackage[T1]{fontenc}      % Police contenant les caractères français
+\usepackage{geometry}         % Définir les marges
+\usepackage[francais]{babel}  % Placez ici une liste de langues, la     
+\bibliographystyle{abbrvnat}
+\usepackage[authoryear,round]{natbib}
+\usepackage{enumerate}
+\usepackage{pifont}
+\usepackage{fancyvrb}
+\makeatletter
+\AtBeginDocument{
+ 	\def\labelitemi{\textbullet}
+ 	\def\labelitemii{\ding{43}}
+}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	top=20mm,
+	bottom=20mm
+}
+
+\renewcommand{\contentsname}{Sommaire}
+
+
+\begin{document}
+
+\begin{center}
+ \huge{ \textbf{Polytech\\Biotech III}}\\
+\end{center}
+\rule[0.5ex]{\textwidth}{0.3mm}
+\begin{flushleft}
+\textbf{Module:} Bioinformatique et analyse de données.\\
+\textbf{Responsables:} D. Puthier, A. Sergé, N. Terrapon.\\
+\textbf{Date:} Mardi 24 Janvier 2017.\\
+\textbf{Durée:} 2 heures.\\
+\textbf{Calculatrices/portables:} non autorisés.\\ 
+\textbf{Documents:} non-autorisés.\\
+
+\end{flushleft}
+\begin{enumerate}
+\item Vous répondrez aux questions qui suivent sur la feuille d'examen qui vous sera fournie. 
+\item Ecrivez lisiblement.
+\item Respectez bien les consignes qui vous sont données dans chacune des questions.
+\item N'oubliez pas de  signer la feuille d'émargement après avoir rendu votre copie.
+\end{enumerate}
+\rule[0.5ex]{\textwidth}{0.3mm}\\
+\vspace{0.1cm}
+
+\section{Introduction}
+
+ Nous ferons référence, par la suite, au fichier \textit{transcript.fasta}. Ce fichier contient \textbf{les séquences correspondant aux exons de transcrits d'un génome fictif)}. Comme tout fichier FASTA il contient une suite d'enregistrements composés comme suit:\\
+
+\begin{itemize}
+	\item Une ligne pour \textbf{l'entête ('header' pour les anglo-saxons)}, commençant par le caractère ">" (un chevron) et  qui contient des informations permettant de qualifier la séquence qui se trouve à la ligne suivante. Ici \textbf{l'entête contient le nom du transcrit, le numéro de l'exon et le brin} (le caractère  'tube' ('|') est utilisé comme séparateur, ).
+	\begin{itemize}
+		\item
+		\begin{BVerbatim}
+		>Nom du transcrit|numero de l'exon|brin
+		\end{BVerbatim}
+	\end{itemize}
+	\item \textbf{Une ligne pour la séquence nucléotidique de l'exon}. Notez, qu'ici les points de suspension indiquent que les séquences ne sont pas données dans leur totalité.
+	\begin{itemize}
+		\item
+		\begin{BVerbatim}
+		ATCGATAACATACAAGCTA...
+		\end{BVerbatim}
+	\end{itemize}
+\end{itemize}
+
+
+  \vspace{0.2cm}
+
+On donne ci dessous les premières lignes du fichier \textit{transcript.fasta}. On peut y voir les lignes correspondant à trois transcripts (A, B et C) contenant respectivement 3, 2 et 4 exons/séquences. Deux d'entre eux (A et B) sont produits par le brin + tandis que C est produit par le brin -.\\
+ 
+
+\begin{BVerbatim}
+>A|1|+
+GATAGATATAAATATCAAATCATC
+>A|2|+
+ACTAAAACACACACACCAACACCA
+>A|3|+
+ACGACAACTAGCACTAAGATCACA
+>B|1|+
+CAGCAACAAGATAAAGCCGGGGAT
+>B|2|+
+TCAGTAAGTAAAGATAAAGAAGAT
+>C|1|-
+TCAGTAAGTAAAGATAAAGAAGAT
+>C|2|-
+TATCAGACGAGACAGACAGCAGAG
+>C|3|-
+CTACCGCAGCATACAGACAACCAC
+>C|4|-
+GGTGCTGCCTCGCCTCGCTCGCTC
+...
+\end{BVerbatim}
+
+
+\section{Commandes Unix: "Première machine sous Unix" (4 points)}
+
+ D. Ritchie, est  étudiant, débutant dans le milieu de la bioinformatique. D. Ritchie, viens de recevoir son nouvel ordinateur. L'un de ses collègue l'a aidé à installer un système Unix. Sur ce système, son répertoire utilisateur ('home') se trouve dans $/home/ritchie$. Il se connecte, ouvre un terminal et cherche à faire ses premiers pas. \\
+ 
+ \textbf{Questions:} Vous devez l'aider à répondre aux questions suivantes à l'aide d'une commande Unix.\\
+ 
+ 	\begin{enumerate}
+ 		\item Comment se déplacer dans son répertoire home.
+ 		\item Comment lister le contenu du répertoire courant (\textit{i.e.} dans lequel il se trouve).
+ 		\item Comment télécharger le fichier \textit{transcript.fasta.gz} à l'adresse \textit{http://ritchie-user.fr/transcript.fasta.gz}
+ 		\item Comment décompresser le fichier \textit{transcript.fasta.gz} (on obtiendra un fichier sans l'extension .gz).
+ 		\item Comment compter  les lignes du fichier transcript.fasta.
+ 		\item Comment regarder les 20 premières lignes du fichier transcript.fasta.
+ 		\item Comment regarder les 20 dernières lignes du fichier transcript.fasta.
+ 		\item Comment, en utilisant grep, compter le nombre de d'enregistrements (i.e de lignes contenant ">").
+ 		\item Comment créer un dossier \textit{result} dans son dossier 'home' ?
+ 		\item Comment renommer le dossier \textit{result}  en \textit{results} (faute de frappe...) ?
+ 		\item Comment déplacer le fichier \textit{transcript.fasta}  dans le dossier \textit{results}.
+
+ 	\end{enumerate}
+ 	 
+ 
+ \section{Expressions régulières: "Cherchons des motifs" (4 points)}
+ 
+
+  Maintenant que notre étudiant à configuré sa machine, son premier travail est d'analyser le contenu du fichier fasta qu'on lui a fourni (transcript.fasta). Son responsable lui a soumis une liste de questions auxquelles il souhaiterait pouvoir répondre. Pour répondre à ces questions il aura besoin d'utiliser la commande \textit{grep} pour trouver les lignes vérifiant des expressions régulières. La forme des commandes sera celle indiquée ci-dessous (les points de suspensions seront remplacés par une expression régulière).\\
+  
+  \begin{BVerbatim}
+  d.ritchie@machine: grep ...  transcript.fasta 
+  \end{BVerbatim}
+  
+  \vspace{0.2cm}
+  
+  Le tableau ci-dessous contient quelques opérateurs d'expressions régulières et leurs significations que vous pourriez être appelés à utiliser: \\
+  
+  
+  \begin{tabular}{|c|l|}
+  	\hline \textbf{Opérateur} & \textbf{Signification} \\ 
+  	\hline . & un caractère quelconque. \\ 
+  	\hline  [a-z] &  Une lettre minuscule (interval, ex : [u ? w]).\\ 
+  	\hline  [A-Z] &  Une lettre majuscule (interval, ex : [A ? E]).\\ 
+  	\hline  [ABc] & A ou B ou c. \\ 
+  	\hline  [\textasciicircum ABab]  &  Toute lettre différente de a et b (minuscule ou majuscule).  \\ 
+  	\hline  \textasciicircum &  Début de ligne.\\ 
+  	\hline  \$ & Fin de ligne \\ 
+	\hline  + & 1 ou n fois le caractère qui précède. \\ 
+  	\hline  * & 0 à n fois le caractère qui précède. \\ 
+  	\hline  {n,m} & Le caractère qui précède répété entre n et m fois. \\ 
+    \hline  \textbackslash & Caractère d?échappement. \\ 
+    \hline 
+  \end{tabular} 
+
+  \vspace{0.5cm}
+
+\textbf{Questions:} Construisez les expressions régulières permettant de sélectionner les lignes suivantes.
+
+\vspace{0.3cm}
+
+ 	\begin{enumerate} 		
+ 		\item Les lignes contenant le caractère ">" ?
+ 		\item Les lignes contenant le motif (\textit{i.e} suite de caractères) 'ATGCC' ?
+ 		\item Les lignes contenant le motif 'atgcc' ?
+ 		\item Les lignes contenant le motif 'ATC'  suivi de 2 à 3 caractères suivis du motif ATG ?
+		\item Les lignes commençant par 'AGG'  ?
+		\item Les lignes finissant par 'AAA'  ?
+		\item Les lignes  commençant par 'AGG'  et finissant par 'AAA'  ?
+		\item Les lignes  commençant par 'AGG', finissant par 'AAA'  et contenant le motif 'GGG' entre les deux ?
+		\item Les lignes  ne contenant que les caractères A, T, G ou C.
+		\item Les lignes lignes vides ?
+		\item Les lignes  ne contenant pas les caractères A, T, G ou C ?
+ 	\end{enumerate}
+
+\vspace{0.2cm}
+
+\newpage
+
+\section{Python: "Mince alors" (4 points)}
+
+D. Ritchie a écrit un programme assez rudimentaire permettant de convertir le fichier \textit{transcript.fasta} en un format tabulé dont la forme est la suivante:
+
+\vspace{0.3cm}
+
+\begin{verbatimtab}
+transcript	exon_number	strand	sequence
+A	1	+	GATAGATATAAATATCAAATCATC
+A	2	+	ACTAAAACACACACACCAACACCA
+...
+\end{verbatimtab}
+
+Malheureusement, à la suite d'une erreur de manipulation (avec la commande  gshuf), il a  qui a randomisé les lignes de son programme. Zut...\\
+
+\vspace{0.3cm}
+
+\textbf{Question}: réorganisez les lignes du programme  pour que celui-ci puisse à nouveau faire ce pour quoi il a été écrit. Reportez le code réorganisé dans votre copie d'examen.
+
+\vspace{0.3cm}
+
+\begin{verbatimtab}
+     01	        header =  transcript + "\t" +  exon_number + "\t" + strand
+     02	        print("transcript\texon_number\tstrand\tsequence")
+     03	    if line.startswith(">"):
+     04	    n += 1        line = line.lstrip(">")
+     05	for line in file_handler:    
+     06	        fields = line.split("|")
+     07	    line = line.rstrip("\n")
+     08	        print(header + "\t" + line)
+     09	file_handler = open("transcript.fasta")
+     10	        exon_number = fields[1]
+     11	    if n == 0:
+     12	        strand = fields[2]
+     13	        transcript = fields[0]
+     14	n=0
+     15	    else:
+\end{verbatimtab}
+
+\section{Python : "Où sont les commentaires  !"  (5 points)}
+
+D. Ritchie a écrit un programme mais, en l'absence de commentaires, il ne sait plus ce qu'il était censé faire. Le code du programme est donné ci-dessous. Recopiez le code sur votre copie en le commentant et en utilisant des noms de  variables plus explicites  (3 points). 
+\textbf{Question}: Qu'est censé faire ce programme ? Expliquez. (2 points).
+
+\begin{BVerbatim}[fontsize=\small]
+01	fh = open("transcript.fasta")
+02	nb = dict()
+03	for l in fh:    
+04	    l = l.rstrip("\n")
+05	    if l.startswith(">"):
+06	        l = l.lstrip(">")
+07	        f = l.split("|")
+08	        t = f[0]
+09	        if t not in nb:
+10	            nb[t] =1
+11	        else:
+12	            nb[t] +=1
+13	fh.close()
+14	fh = open("transcript.fasta")
+15	print(nb)
+16	for l in fh:
+17	    l = l.rstrip("\n")
+18	    if l.startswith(">"):
+19	        h = l
+20	        l = l.lstrip(">")
+21	        f = l.split("|")
+22	        t = f[0]        
+23	    else:
+24	        if nb[t] >= 4 :
+25	            print(h)
+26	            print(l)
+\end{BVerbatim}
+
+\vspace{0.2cm}
+
+
+
+\section{Python "Sélection aléatoire" (3points)}
+\vspace{0.1cm}
+
+\textbf{Questions:} Ecrivez un programme permettant de lire le fichier "transcript.fasta" et de sélectionner au hasard 10 transcripts dont les séquences des exons correspondant devront être imprimées au format FASTA.
+
+Vous pouvez dans ce programme utiliser la fonction randint() du module random. Celle-ci permet de tirer, au hasard, un entier dans un intervalle  [n, m] (exemple ci-dessous).\\
+
+
+\begin{verbatimtab}
+from random import randint
+n=2
+m=5
+randint(n,m) # un entier au hasard parmi: 2,3,4,5
+\end{verbatimtab}
+
+\end{document}

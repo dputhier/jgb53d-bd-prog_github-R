@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,epsfig,hyperref}%psfig,pstricks,
+\parindent 0in
+\usepackage{graphicx}
+\usepackage{moreverb} % tabulation in verbatim mode
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage[latin1]{inputenc} % LaTeX, comprends les accents !
+\usepackage[T1]{fontenc}      % Police contenant les caractères français
+\usepackage{geometry}         % Définir les marges
+\usepackage[francais]{babel}  % Placez ici une liste de langues, la     
+\bibliographystyle{abbrvnat}
+\usepackage[authoryear,round]{natbib}
+\usepackage{enumerate}
+\usepackage{pifont}
+\makeatletter
+\AtBeginDocument{
+ 	\def\labelitemi{\textbullet}
+ 	\def\labelitemii{\ding{43}}
+}
+
+\renewcommand{\contentsname}{Sommaire}
+
+
+\begin{document}
+
+\begin{center}
+ \huge{ \textbf{Polytech\\Biotech III}}\\
+\end{center}
+\rule[0.5ex]{\textwidth}{0.3mm}
+\begin{flushleft}
+\textbf{Module:} Bases de données et programmation.\\
+\textbf{Responsable:} D. Puthier, Jacques van Helden \& Nicolas Terrapon.\\
+\textbf{Date:} Mardi 27 Janvier.\\
+\textbf{Durée:} 2 heures.\\
+\textbf{Calculatrices/portables:} non autorisés.\\ 
+\textbf{Documents:} non-autorisés.\\
+\textbf{Nombre de pages: 4 (2x2)} \\
+
+\end{flushleft}
+Vous répondrez aux questions qui suivent sur la feuille d'examen qui vous sera fournie. Ecrivez distinctement. Si une instruction contient des espaces ou des tabulations, faites les apparaître clairement. Respectez bien les consignes qui vous sont données. N'oubliez pas d'indiquer vos noms et prénoms sur la feuille d'examen et de signer la feuille d'emargement après avoir rendu votre copie.\\
+\rule[0.5ex]{\textwidth}{0.3mm}\\
+\vspace{0.1cm}
+
+
+Le fichier "refGene\_sub.txt", dont les premières lignes sont affichées ci-dessous, sera utilisé dans certains des exercices proposés. Ce fichier contient des informations proposées par la base de données refSeq que nous avons utilisée en cours.\\ 
+Il s'agit d'un fichier tabulé à quatre colonnes dont chaque ligne contient les informations sur un transcrit humain. L'identifiant du transcript est donné en colonne 1. La colonne 2 donne le symbole (nom) du gène dont  il est issu, la colonne 3 le chromosome qui le porte et la colonne quatre la taille de ce transcrit.
+
+\begin{verbatimtab}
+transcript	gene	chromosome	transcript_length
+NM_000072	CD36	chr7	2104
+NM_001001547	CD36	chr7	2065
+NM_001127443	CD36	chr7	1810
+NM_006532       ELL     chr19   4027
+NM_001185074    ZCCHC6  chr9    4972
+NM_002030       FPR3    chr19   2517
+NM_001198673    TMEM136 chr11   4118
+
+...
+\end{verbatimtab}
+
+
+
+\vspace{0.5cm}
+\section{Premiers pas avec Unix (5 points)}
+\vspace{0.1cm}
+Attention, vous devrez, toujours utiliser une commande (ou plusieurs) pour répondre à la question posée.\\ 
+Mr L. Torwald est un étudiant de la promo Polytech 2015 qui fait ses premiers pas dans l'environnement Unix/Linux et qui s'est vu confié une analyse bioinformatique. Le chemin de son répertoire d'utilisateur (\textit{home}) est:
+
+\begin{verbatim}
+/etudiants/2015/torwald
+\end{verbatim}
+L. torwald s'est placé dans le répertoire ``/'' (c'est donc le répertoire ``courant''). \\
+
+\textbf{Proposez une instruction lui permettant:}
+\vspace{0.1cm}\\
+
+\begin{enumerate}[1) ]
+\item De lister les fichiers et dossiers présents dans le répertoire courant.
+\item De lister les fichiers et dossiers présents dans le répertoire courant en affichant les droits associés.
+\item De lister les fichiers et dossiers présents dans le répertoire courant y compris les fichier cachés.
+\item De lister, sans se déplacer, les fichiers présents dans son répertoire utilisateurs ("home").
+\item De se déplacer dans son répertoire utilisateur.
+\item De visualiser, avec la commande \textit{less} le contenu du fichier "refGene\_sub.txt" présent dans le répertoire "/tmp".
+\item D'afficher les 10 premières lignes du fichier "refGene\_sub.txt" présent dans le répertoire "/tmp".
+\item D'afficher les 10 dernières lignes du fichier "refGene\_sub.txt" présent dans le répertoire "/tmp".
+\item D'extraire la colonne 3 du fichier "refGene\_sub.txt" présent dans le répertoire "/tmp".
+\item De rechercher, dans ce même fichier,  les lignes commençant par "NM".
+\item De rechercher, dans ce même fichier,  les lignes commençant par "NM" et finissant par \textit{X} ou \textit{Y}.
+\item D'afficher les 5 premières lignes de la colonne 3 du fichier "refGene\_sub.txt" présent dans le répertoire "/tmp".
+\item De copier le fichier "refGene\_sub.txt" depuis le répertoire /tmp vers son répertoire utilisateur ("home").
+\item De renommer le fichier "refGene\_sub.txt" (répertoire utilisateur) en "refGene\_sub\_1.txt".
+\end{enumerate}
+
+\section{Zut  !  (6 points)}
+L. Torwald débute... Il a par erreur utilisé la commande gshuf qui a randomisé les lignes de sont programme \textit{getMaxLen.py}. Ce programme permet, normalement, de demander un nom de chromosome à l'utilisateur et, après lecture du fichier \textit{refGene\_sub.txt} d'afficher la taille du transcrit le plus long de ce chromosome. On donne un exemple d'utilisation du programme dans le terminal:
+
+\begin{verbatimtab}
+$ python3 getMaxLen.py
+Entrez une valeur pour le chromosome (1,2,3,...X,Y): X
+37027    
+\end{verbatimtab}
+
+\textbf{Question}: réorganiser les lignes du programme pour que celui-ci puisse à nouveau faire ce pour quoi il a été écrit. Les lignes numérotées du programme sont données ci-dessous.
+
+\begin{verbatimtab}
+1	    l = l.rstrip("\n")
+2	f = open("refGene_sub.txt", "r")
+3	            mx_l = int(l[3])
+4	if ch not in ch_l:
+5	    cc = l[2].lower()
+6	for l in f:
+7	    if cc == "chr" + ch:
+8	   
+9	ch = input("Entrez une valeur pour le chromosome (1,2,3,...X,Y): ").lower()
+10	        if int(l[3]) > mx_l:
+11	    ch_l[i] = str(ch_l[i]) # convertion des entiers en chaîne de caractères
+12	cn = 22 # 22 autosomes
+13	print(mx_l)
+14	mx_l = 0
+15	ch_l = list(range(1, cn + 1)) # une liste d'entiers
+16	    l = l.split("\t")
+17	    exit()  
+18	for i in range(0, cn):
+19	# -*- coding: utf8 -*-
+20	ch_l = ch_l + ["x", "y"]
+\end{verbatimtab}
+
+\newpage
+\section{Où sont les commentaires  !  (5 points)}
+
+Un collègue de L. Torwald, lui aussi débutant, lui a fourni du code dans un fichier au nom peu explicite: \textit{script.py}. Le code ci-dessous n'est pas commenté mais on comprend vite que le script prend en entrée ce même fichier "refGene\_sub.txt". \\
+
+\begin{verbatimtab}
+	file_in = open("refGene_sub.txt", "r")
+	d = dict()
+	
+	for l in file_in:
+	
+		l = l.rstrip("\n")
+		l = l.split("\t")
+	
+		if l[1] in d:
+			d[l[1]] = d[l[1]]+","+l[0]
+		else:
+			d[l[1]] = l[0]
+	
+	for key in d.keys():
+		print(key + "\t" + str(d[key]))
+\end{verbatimtab}
+
+\textbf{Questions 1:} recopiez le code sur votre copie en le commentant exhaustivement  (3 points).
+\textbf{Questions 2:} qu'est censé faire ce programme ? (2 points)
+
+
+\section{Sélection aléatoire (4 points)}
+\vspace{0.2cm}
+
+Ecrivez un programme permettant de lire le fichier "refGene\_sub.txt" et de tirer 100 gènes au hasard parmi l'ensemble des gènes du chromosome 1 (\textit{i.e.} chr1). Votre réponse devra comporter :
+
+\begin{enumerate}
+	\item Le pseudo-code permettant de décrire la stratégie (2 points)
+	\item Le code du programme écrit en Python ? (2 points)
+\end{enumerate}
+
+Vous devez dans ce programme utiliser la fonction randint() du module random. Celle-ci permet de tirer, au hasard, un entier dans un interval  [n, m],  On donne un exemple d'utilisation de la fonction randint(). 
+
+\begin{verbatimtab}
+from random import randint
+n=2
+m=5
+randint(n,m) # un entier au hasard parmi: 2,3,4,5
+\end{verbatimtab}
+
+
+\end{document}
+
